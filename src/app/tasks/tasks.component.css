@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+}
+.todo, .doing, .done{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 10px;
+    padding: 20px 0;
+}
+.todo{
+    background-color: aqua;
+}
+.doing{
+    background-color: blueviolet;
+}
+.done{
+    background-color: rgb(45, 135, 209);
+}
+[class*="card-"]{
+    background-color: white;
+    padding: 50px 91px;
+    margin: 5px;
+}

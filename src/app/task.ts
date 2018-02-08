@@ -1,4 +1,6 @@
 export class Task {
-    public descricao: string;
+  
+     tarefa: string;
+     descricao: string;
 }
 

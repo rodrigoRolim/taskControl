@@ -1,0 +1,74 @@
+li{
+    background-color: blueviolet;
+    list-style-type: none;
+    border: 1px solid rgb(78, 2, 150);
+}
+ul{
+    width: 20%;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+*{
+    box-sizing: border-box;
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    box-sizing: content-box;
+    width: 80%;
+    height: auto;
+    
+}
+.todo, .doing, .done{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    padding: 30px;
+    height: 200px;
+    width: auto;
+    overflow: auto;
+    border-radius: 4px;
+    box-shadow: 2px 5px 5px 2px rgba(0,0,0,.02);
+}
+.todo{
+    background-color: rgba(16, 134, 75, 0.575);
+}
+.doing{
+    background-color: rgba(118, 7, 161, 0.651);
+}
+.done{
+    background-color: rgba(14, 98, 167, 0.801);
+}
+[class*="card-"]{
+    background-color: rgba(255,255,250, 0.9);
+    padding: 50px 50px;
+    margin: 5px;
+    box-shadow: 1px 8px 8px 1px rgba(0,0,0,.08);
+}
+[class*="card-"]:active{
+    transform: rotate(-1.9deg) scale(1.1,1.1);
+}
+.postite{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px auto;
+}
+.green, .violet, .blue{
+    color: white;
+    width: 33%;
+    height: 200px;
+    text-align: center;
+}
+h2{
+    margin:0 10px;
+} 
+.green{ background-color:rgba(16, 134, 75, 0.575) }
+.violet{ background-color:  rgba(118, 7, 161, 0.651) }  
+.blue{ background-color: rgba(14, 98, 167, 0.801)}

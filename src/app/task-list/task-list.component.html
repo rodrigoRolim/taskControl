@@ -9,19 +9,26 @@
     <div class="todo" [dragula]='"second-bag"'>
      
       <div class="card-to" *ngFor="let task of tasks">
-        <fa name="trash" style="color:rgba(136, 136, 136, 0.808)"></fa>
+        <fa name="trash" ></fa>
         <p>{{ task.tarefa }}</p>
+        
       </div>
     </div>
     <h2>Doing</h2>
     <div class="doing" [dragula]='"second-bag"'>
         
-      <div class="card-done" *ngFor="let task of tasks"><p>{{ task.tarefa }}</p></div>
+      <div class="card-done" *ngFor="let task of tasks">
+        <fa name="trash" ></fa>
+        <p>{{ task.tarefa }}</p>
+      </div>
     </div>
     <h2>Done</h2>
     <div class="done" [dragula]='"second-bag"'>
         
-      <div class="card-doing" *ngFor="let task of tasks"><p>{{ task.tarefa }}</p></div>
+      <div class="card-doing" *ngFor="let task of tasks">
+        <fa name="trash" ></fa>
+        <p>{{ task.tarefa }}</p>
+      </div>
     </div>
   </div> 
 </div>

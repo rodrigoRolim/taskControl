@@ -9,6 +9,7 @@ ul{
 a{
     text-decoration: none;
     color: white;
+    
 }
 *{
     box-sizing: border-box;
@@ -23,7 +24,7 @@ a{
     box-sizing: content-box;
     width: 80%;
     height: auto;
-    
+    padding: 50px;
 }
 .todo, .doing, .done{
     display: flex;
@@ -37,36 +38,40 @@ a{
     box-shadow:  0px 8px 8px 0px rgba(0,0,0,.02);
 }
 .todo{
-    border-color: #e6e6fa;
+    border-color: #2e2e94d5;
     border-style: solid;
     border-bottom-width: 10px;
     border-top-width: 0;
-    border-left-width: 0;
+    border-left-width: 10px;
     border-right-width: 0;
     
 }
 .doing{
-    border-color: #e6e6fa;
+    border-color: #2e2e94d5;
     border-style: solid;
     border-bottom-width: 10px;
     border-top-width: 0;
-    border-left-width: 0;
+    border-left-width: 10px;
     border-right-width: 0;
 }
 .done{
-    border-color: #e6e6fa;
+    border-color: #2e2e94d5;
     border-style: solid;
     border-bottom-width: 10px;
     border-top-width: 0;
-    border-left-width: 0;
+    border-left-width: 10px;
     border-right-width: 0;
 }
 [class*="card-"]{
     background-color: rgba(16, 134, 75, 0.575);
     margin: 10px;
-    box-shadow: 1px 8px 8px 1px rgba(0,0,0,.08);
+    box-shadow: 1px 8px 8px  rgba(0,0,0,.2);
     display: flex;
     flex-direction: column;
+    color:rgba(255, 255, 255, 0.918);
+    font-size: 1.0rem;
+    font-weight: 500;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 [class*="card-"]:active{
     transform: rotate(-1.9deg) scale(1.1,1.1);
@@ -76,29 +81,87 @@ a{
     display: flex;
     justify-content: space-around;
     margin: 20px auto;
+    margin-bottom: 60px;
 }
 .green, .violet, .blue{
-    color: white;
+   
     width: 20%;
     height: 120px;
     text-align: center;
+}
+.violet{
+    box-shadow: 1px 7px 7px 0px rgb(78, 2, 150);
+}
+.green{
+    box-shadow: 1px 7px 7px 0px rgb(2, 150, 76);
+}
+.blue{
+    box-shadow: 1px 7px 7px 0px rgb(2, 71, 150);
 }
 h2{
     margin:0 auto;
     color: gray;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 } 
-.green{ background-color:rgba(16, 134, 75, 0.575) }
-.violet{ background-color:  rgba(118, 7, 161, 0.651) }  
-.blue{ background-color: rgba(14, 98, 167, 0.801)}
+.green{ 
+    background-color:rgba(16, 134, 75, 0.575);
+    display: flex;
+    flex-direction: column;
+    border: 12px solid rgba(16, 134, 75, 0.575);
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    
+}
+.violet{ 
+    background-color:  rgba(118, 7, 161, 0.651);
+    display: flex;
+    flex-direction: column;
+    border: 12px solid rgba(118, 7, 161, 0.651);
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}  
+.blue{ 
+    background-color: rgba(14, 98, 167, 0.801);
+    display: flex;
+    flex-direction: column;
+    border: 12px solid rgba(14, 98, 167, 0.801);
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+}
 fa{
-    background-color:rgba(117, 7, 161, 0.212);
+  
     flex: content;
-    color: black;
+    color: rgba(255, 255, 255, 0.918);
     padding: 8px;
     align-self: flex-end;
     box-shadow: 2px 6px 6px 2px rgba(0,0,0,.02);
 }
-p{
+fa:hover{
+    transform: scale(1.2,1.2);
+}
+[class*="card-"] a{
     margin: 0px 50px 0 50px;
+    color: rgba(255, 255, 255, 0.918);
+}
+[class*="card-"] a:hover{
+    transform: scale(1.2,1.2);
+}
+.fa-plus-circle{
+    /* margin:0 auto; */
+    align-self: center;
+    margin: 40px 0;
+    font-size: 1.8rem;
+    
+}
+.green .fa-plus-circle{
+    color: rgba(16, 134, 75, 0.575);
+}
+.violet .fa-plus-circle{
+    color: rgba(118, 7, 161, 0.651);
+}
+.blue .fa-plus-circle{
+    color: rgba(14, 98, 167, 0.801);
 }

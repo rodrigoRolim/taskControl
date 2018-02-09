@@ -4,7 +4,10 @@ import { Task } from '../task';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.css']
+  styleUrls: ['./task-list.component.css'],
+  // template: `
+  //   <router-outlet></router-outlet>
+  // `
 })
 export class TaskListComponent implements OnInit {
   msg='';

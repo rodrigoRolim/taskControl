@@ -7,7 +7,7 @@ import { Task } from '../task';
 })
 export class TasksComponent implements OnInit {
  
-  task: Task = {descricao:'isso é uma tarefa a ser feita'};
+
   constructor() { }
 
   ngOnInit() {

@@ -1,3 +1,13 @@
-<p>
-  task-create works!
-</p>
+<div [ngClass]="getContainer()">
+  <form>
+    <div class="form-group">
+      <label for="tarefa">Tarefa</label>
+      <input type="text" class="form-control" name="tarefa" id="tarefa">
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descricao</label>
+      <textarea wrap="off" cols="30" rows="5" class="form-control" name="descricao" id="descricao"></textarea>
+    </div>
+    <button type="submit" id="bt-save">Save</button>
+  </form>
+</div>

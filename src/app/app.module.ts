@@ -11,6 +11,7 @@ import { TaskAllComponent } from './task-all/task-all.component';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AppRoutingModule } from './/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     BrowserModule,
     FormsModule,
     DragulaModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 <div class="postite">
-  <div class="green">green</div>
-  <div class="violet">violet</div>
-  <div class="blue">blue</div>
+  <a routerLink="/tarefas/create/3" class="green"><i class="fa fa-plus-circle"></i></a>
+  <a routerLink="/tarefas/create/2" class="violet"><i class="fa fa-plus-circle"></i></a>
+  <a routerLink="/tarefas/create/1" routerLinkActive="active" class="blue"><i class="fa fa-plus-circle"></i></a>
 </div>
 <div class='wrapper'>
   <div class="container">
@@ -10,7 +10,7 @@
      
       <div class="card-to" *ngFor="let task of tasks">
         <fa name="trash" ></fa>
-        <p>{{ task.tarefa }}</p>
+        <a href="#">{{ task.tarefa }}</a>
         
       </div>
     </div>
@@ -19,7 +19,7 @@
         
       <div class="card-done" *ngFor="let task of tasks">
         <fa name="trash" ></fa>
-        <p>{{ task.tarefa }}</p>
+        <a href="#">{{ task.tarefa }}</a>
       </div>
     </div>
     <h2>Done</h2>
@@ -27,7 +27,7 @@
         
       <div class="card-doing" *ngFor="let task of tasks">
         <fa name="trash" ></fa>
-        <p>{{ task.tarefa }}</p>
+        <a href="#">{{ task.tarefa }}</a>
       </div>
     </div>
   </div> 

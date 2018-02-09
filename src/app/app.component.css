@@ -15,12 +15,23 @@
     padding: 18px;
 
 }
-#bt-create{
+#bt-create-r, #bt-create-g, #bt-create-b {
     border: 1px solid transparent;
-    background-color: rgb(184, 85, 85);
+   
     color: white;
     padding: 12px;
     border-radius: 4PX;
     text-decoration: none;
+    font-weight: bolder;
 
+}
+#bt-create-r {
+    background-color: rgb(173, 56, 56);
+}
+footer{
+    background-color: rgba(27, 2, 51, 0.979);
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
 }

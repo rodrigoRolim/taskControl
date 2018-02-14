@@ -95,7 +95,7 @@ a{
     font-size: 0.9rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* height: 120px;  */
+    height: 120px;
 }
 /* [class*="card-"]:active{
     transform: rotate(-1.9deg) scale(1.1,1.1);

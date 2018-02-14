@@ -35,6 +35,9 @@ const taskRoutes: Routes = [
                 component: TaskDetailComponent
             }
         ] 
+    },
+    {
+        path: '**', redirectTo: 'tasks',  pathMatch: 'full' 
     }
    
 ];

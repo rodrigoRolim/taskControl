@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskCreateComponent } from './task-create/task-create.component'; 
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { TaskLoginComponent } from './task-login/task-login.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,11 @@ const routes: Routes = [
     redirectTo: '/tasks', 
     pathMatch:'full' 
   },
- // { path: '**', component: TaskListComponent }
+  {
+    path: 'login',
+    component: TaskLoginComponent
+  }
+//{ path: '**', redirectTo:'/tasks', pathMatch: 'full'}
   // {
   //   path: 'tarefas/create',
   //   component: TaskCreateComponent

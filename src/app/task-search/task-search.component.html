@@ -1,0 +1,11 @@
+
+            <h3>Busca</h3>
+            <div class="form-group">
+                <label for=""></label>
+                <input type="text" class="form-control" placeholder="Enter your ask" 
+                    [ngModel]="busca" (ngModelChange)="search($event)"
+                >
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item cursor-pointer" *ngFor="let t of task | async" (click)="verDetalhe(t)">{{ t.tarefa }}</li>
+            </ul>

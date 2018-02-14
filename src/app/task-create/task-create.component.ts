@@ -14,7 +14,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
   styleUrls: ['./task-create.component.css']
 })
 export class TaskCreateComponent implements OnInit {
-  //tasks: Task[] = [];
+  tasks: Task[] = [];
   task: Task;
   isNew: boolean = true;
   states: number;
@@ -28,21 +28,19 @@ export class TaskCreateComponent implements OnInit {
     this.route.params.subscribe(params => {
      this.value = +params['id'];
     //console.log(this.value);
-    this.task = new Task(0,'','','',0);
+    this.task = new Task();
+    this.task.state = 1;
+    this.task.color = "#23244D";
       if(this.value > 0){
         this.isNew = false;
         this.taskService.getTask(this.value).subscribe(task => {
           this.task = task;
         });
-      } else {
-        
-        this.task = new Task(0,'','','#EF3CE8', 1);
-        console.log(this.task.state);
-      }
+      } 
     });
-    // this.taskService.getTasks().subscribe(tasks => {
-    //   this.tasks = tasks;
-    // });
+    this.taskService.getTasks().subscribe(tasks => {
+      this.tasks = tasks;
+    });
   }
   save(): void {
     this.taskService.updateTask(this.task)
@@ -59,10 +57,10 @@ export class TaskCreateComponent implements OnInit {
       this.taskService.addTask(this.task).subscribe(task => { 
       console.log(task); 
       this.goBack()});
-     
+     console.log("entrei no if");
     } else {
-      this.task.state = (t.checked)? 1: (dng.checked)? 2: 3
-       //= +f.value.step;
+      this.task.state = (t.checked)? 1: (dng.checked)? 2: 3;  
+      console.log("entrei no else");
       
       this.taskService.updateTask(this.task).subscribe(() => this.goBack())
     }

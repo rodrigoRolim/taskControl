@@ -5,10 +5,14 @@
         <button type="button" id="bt-home" routerLink="/" title="página inicial">Home</button>
     </div>
     <div class="search">
-        <input type="text" class="input-search" placeholder="search task ...">
+        <input type="search" class="input-search" placeholder="search task ..."
+        name="busca"
+        [(ngModel)]="termo"
+        >
     </div>
 </nav>
 <router-outlet></router-outlet>
+<app-task-search [busca]="termo" (buscaChange)="termo=$event"></app-task-search>
 <footer>
     <p>:)</p>
 </footer>

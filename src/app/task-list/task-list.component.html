@@ -6,6 +6,16 @@
 
   <div class="container">
     <div class="tasks">
+        <!-- <div [ngClass]="classesCss" role="alert" *ngIf="mensagem">
+            <span [ngSwitch]="mensagem.tipo">
+                <strong *ngSwitchCase="'danger'">Error!</strong>
+                <strong *ngSwitchCase="'warning'">Alerta!</strong>
+                <strong *ngSwitchCase="'success'">Sucesso!</strong>
+                <strong *ngSwitchDefault>Error!</strong>
+            </span>
+            
+             {{ mensagem.texto }}
+         </div> -->
         <h2>To do</h2>
         <nav class="all-view-delete">
             <a type="button" [routerLink]="['all', 'todo']"><i class="fa fa-tasks"></i></a>

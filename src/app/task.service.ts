@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Task } from './task';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { TASKS } from './mock-tasks';
 import { catchError, map, tap } from 'rxjs/operators';
-
+import { Http, Headers, Response } from  '@angular/http';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -61,4 +61,11 @@ export class TaskService {
       catchError(this.handleError<Task>('deleteTask'))
     );
   }
+  search(term: string): Observable<Task[]> {
+    console.log(term+" away");
+    return this.http
+        .get(`${this.tasksUrl}/?tarefa=${term}`)
+        .map((res : Response) => res.json().data as Task[]);
+
+}
 }

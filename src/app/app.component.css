@@ -1,5 +1,5 @@
 #l-postask{
-    color: white;
+    color: rgb(249, 252, 253);
     text-decoration: none;
     padding: 18px;
 
@@ -8,30 +8,50 @@
     background-color: rebeccapurple;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
-    display: flex;
-    flex-direction: row;
+    display: inline-flex;
+    /* flex-direction: row; */
+    width: 100%;
 }
+
 .link-navigation{
     padding: 18px;
 
 }
-#bt-create-r, #bt-create-g, #bt-create-b {
+#bt-create, #bt-home {
     border: 1px solid transparent;
    
     color: white;
     padding: 12px;
-    border-radius: 4PX;
+    margin: 5px;
+    border-radius: 4px;
     text-decoration: none;
     font-weight: bolder;
-
+    font-size: 1.1rem;
+    cursor:pointer;
 }
-#bt-create-r {
-    background-color: rgb(173, 56, 56);
+#bt-create {
+    background-color: brown;
 }
-footer{
+#bt-home {
+    background-color: aquamarine;
+}
+footer {
     background-color: rgba(27, 2, 51, 0.979);
     color: white;
     text-align: center;
     font-weight: bold;
     padding: 10px;
+    
+}
+.search {
+    align-self: center;
+    width: 70%;
+}
+.input-search {
+    float: right;
+    padding: 10px 6px;
+    width: 30%;
+    border-radius: 4px;
+    border: 1px solid transparent;
+   
 }

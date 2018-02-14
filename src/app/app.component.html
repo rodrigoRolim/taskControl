@@ -1,8 +1,14 @@
 <nav class="nav">
     <a  id="l-postask">PosTask</a>
-    
+    <div class="btns">
+        <button type="button" id="bt-create" routerLink="/tasks/save" title="criar uma tarefa">Criar Postite</button>
+        <button type="button" id="bt-home" routerLink="/" title="página inicial">Home</button>
+    </div>
+    <div class="search">
+        <input type="text" class="input-search" placeholder="search task ...">
+    </div>
 </nav>
 <router-outlet></router-outlet>
 <footer>
-    <p>ich will :)</p>
+    <p>:)</p>
 </footer>

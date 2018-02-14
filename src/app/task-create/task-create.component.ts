@@ -1,29 +1,85 @@
 import { Component, OnInit } from '@angular/core';
 import { AppRoutingModule } from '../app-routing.module';
 import { ActivatedRoute } from '@angular/router';
+import { Task } from '../task';
+import { TaskService } from  '../task.service';
+import { Location } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import { RadioControlValueAccessor } from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 @Component({
   selector: 'app-task-create',
   templateUrl: './task-create.component.html',
   styleUrls: ['./task-create.component.css']
 })
 export class TaskCreateComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute) { }
-  value:Number;
+  //tasks: Task[] = [];
+  task: Task;
+  isNew: boolean = true;
+  states: number;
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService,
+    private location: Location
+  ) { }
+  value:number;
   ngOnInit() {
     this.route.params.subscribe(params => {
-     this.value = params['id'];
-     console.log(this.value);
+     this.value = +params['id'];
+    //console.log(this.value);
+    this.task = new Task(0,'','','',0);
+      if(this.value > 0){
+        this.isNew = false;
+        this.taskService.getTask(this.value).subscribe(task => {
+          this.task = task;
+        });
+      } else {
+        
+        this.task = new Task(0,'','','#EF3CE8', 1);
+        console.log(this.task.state);
+      }
     });
-    
+    // this.taskService.getTasks().subscribe(tasks => {
+    //   this.tasks = tasks;
+    // });
   }
-  getContainer():{} {
-    
-    console.log(this.value);
+  save(): void {
+    this.taskService.updateTask(this.task)
+      .subscribe(() => this.goBack())
+  }
+  goBack(): void {
+    this.location.back();
+  }
+  onSubmit(f:any, t:any, dng:any, dn:any): void {
+    //let observableTask: Observable<Task>;
+    console.log(f.value.step);
+    if(this.isNew){
+      this.task.state = +f.value.step;
+      this.taskService.addTask(this.task).subscribe(task => { 
+      console.log(task); 
+      this.goBack()});
+     
+    } else {
+      this.task.state = (t.checked)? 1: (dng.checked)? 2: 3
+       //= +f.value.step;
+      
+      this.taskService.updateTask(this.task).subscribe(() => this.goBack())
+    }
+  }
+  getFormControlClass(isValid: boolean, isPristine: boolean):{} {
     return {
-      'container-b': this.value == 1 ? true: false,
-      'container-r': this.value == 2 ? true: false,
-      'container-g': this.value == 3 ? true: false
+        'form-control': true,
+        'form-control-danger': !isValid && !isPristine,
+        'form-control-success': isValid && !isPristine
     };
   }
+  getFormGroupClass(isValid: boolean, isPristine: boolean):{} {
+    return {
+      'form-group': true,
+      'has-danger': !isValid && !isPristine,
+      'has-success': isValid && !isPristine
+    };
+  }
+
 }

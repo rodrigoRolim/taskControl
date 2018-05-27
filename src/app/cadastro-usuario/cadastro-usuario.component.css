@@ -110,9 +110,20 @@ footer {
     border-radius: 4px;
     border: 1px solid transparent;
 }
-p {
-    border: 1px solid transparent;
-    border-radius: 2px;
-    background-color: rgba(243, 76, 76, 0.856);
+.aparece{
+    display: inline;
+    border: 1px solid rgb(146, 243, 146);
+    background-color: rgb(146, 243, 146);
+    border-radius: 4px;
     color: white;
+    font-weight: bolder;
+}
+.desaparece{
+    display: none;
+}
+.incorreto{
+    display: inline;
+    border: 1px solid rgba(247, 50, 50, 0.795);
+    color: white;
+    font-weight: bolder;
 }

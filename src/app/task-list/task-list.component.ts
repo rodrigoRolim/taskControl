@@ -2,31 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula/ng2-dragula';
 import { Task } from '../task';
 import { TaskService } from '../task.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
-  // template: `
-  //   <router-outlet></router-outlet>
-  // `
 })
 export class TaskListComponent implements OnInit {
   msg='';
   tasks: Task[];
   taskSelected: Task;
   
-  // tasks: Task[] = [
-  //   {id:1, tarefa:'Tarefa A', descricao:'Realizar Tarefa A', color:'rgba(16, 134, 75, 0.575)', state: 1},
-  //   {id:2, tarefa:'Tarefa B', descricao:'Realizar Tarefa B', color:'rgba(16, 134, 75, 0.575)', state: 1},
-  //   {id:3, tarefa:'Tarefa C', descricao:'Realizar Tarefa C', color:'rgba(118, 7, 161, 0.651)', state: 2},
-  //   {id:4, tarefa:'Tarefa D', descricao:'Realizar Tarefa D', color:'rgba(14, 98, 167, 0.801)', state: 3},
-  //   {id:5, tarefa:'Tarefa E', descricao:'Realizar Tarefa E', color:'rgba(118, 7, 161, 0.651)', state: 3},
-  //   {id:6, tarefa:'Tarefa F', descricao:'Realizar Tarefa F', color:'rgba(14, 98, 167, 0.801)', state: 1},
-  // ];
   constructor(
     private dragulaService: DragulaService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private route: Router
   ) { 
    
     dragulaService.drag.subscribe((value) => {
@@ -62,8 +53,12 @@ export class TaskListComponent implements OnInit {
     
   }
   getTasks(): void {
-    this.taskService.getTasks()
-      .subscribe(tasks => this.tasks = tasks);
+    const obj = {token: localStorage.getItem('token')};
+    this.taskService.getTasks(obj)
+      .subscribe(tasks => {
+        console.log(tasks);
+        this.tasks = tasks;
+      });
   }
   onSelect(task: Task): void {
     this.taskSelected = task;
@@ -75,7 +70,6 @@ export class TaskListComponent implements OnInit {
   private hasClass(el: any, name: string) {
     return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
   }
-
   private addClass(el: any, name: string) {
     if (!this.hasClass(el, name)) {
       el.className = el.className ? [el.className, name].join(' ') : name;
@@ -98,29 +92,28 @@ export class TaskListComponent implements OnInit {
   private onDrop(args) {
     let [e, el] = args;
     this.addClass(e, 'ex-moved');
-    console.log({args});
-    console.log(args[2].classList.value);
-    let id: number = +args[0].title; 
+    //console.log({args});
+    //console.log(args[2].classList.value);
+    let id: number = +args[0].id; 
     if(args[2].classList.value == 'done' && args[1].classList.value != 'done') {
-      console.log(+args[0].title);
-      this.taskService.getTask(id).subscribe(task =>{
-        task.state = (args[1].classList.value == 'doing')? 2 : 1;
-        this.taskService.updateTask(task).subscribe();
-      });
+       const task = this.tasks.find(task => task.id == id);
+       task.state = (args[1].classList.value == 'doing ex-over')? 2 : 1;
+       const obj = {token: localStorage.getItem('token'), task: task}
+       this.taskService.updateTask(JSON.stringify(obj)).subscribe();
     }
     if(args[2].classList.value == 'doing' && args[1].classList.value != 'doing') {
-      console.log(+args[0].title);
-      this.taskService.getTask(id).subscribe(task =>{
-        task.state = (args[1].classList.value == 'todo')? 1 : 3;
-        this.taskService.updateTask(task).subscribe();
-      });
-     }
+      const task = this.tasks.find((task) => task.id == id);
+      task.state = (args[1].classList.value == 'todo ex-over')? 1 : 3;
+      console.log(task);  
+      const obj = {token: localStorage.getItem('token'), task: task}
+      this.taskService.updateTask(JSON.stringify(obj)).subscribe();
+    }
     if(args[2].classList.value == 'todo' && args[1].classList.value != 'todo') {
-      console.log(+args[0].title);
-      this.taskService.getTask(id).subscribe(task =>{
-        task.state = (args[1].classList.value == 'doing')? 2 : 3;
-        this.taskService.updateTask(task).subscribe();
-      });
+      const task = this.tasks.find(task => task.id == id);
+      console.log(task);
+      task.state = (args[1].classList.value == 'doing ex-over')? 2 : 3;
+      const obj = {token: localStorage.getItem('token'), task: task}
+      this.taskService.updateTask(JSON.stringify(obj)).subscribe();
     }
   }
 
@@ -134,8 +127,7 @@ export class TaskListComponent implements OnInit {
     this.removeClass(el, 'ex-over');
   }
   filterTaskOfState(s: number): Task[] {
-   let task: Task[] = this.tasks.filter(t => t.state == +s);
-  // console.log(task);
+   const task: Task[] = (this.tasks !== undefined ) ? this.tasks.filter(t => t.state == +s): [];
     return task;
   }
   deleteAll(s: number): void {
@@ -145,8 +137,9 @@ export class TaskListComponent implements OnInit {
       }
     }); 
   }
- 
-  //espera um pouco
-
-  
+  onEdit(task: Task): void {
+    this.taskService.setTaskForEdition(task);
+    this.route.navigate(['tasks/detail']);
+    console.log("fudeu");
+  }
 }

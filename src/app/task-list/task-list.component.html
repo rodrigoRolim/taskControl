@@ -1,21 +1,8 @@
-<!-- <div class="postite">
-  <a routerLink="/tarefas/create/3" class="green"><i class="fa fa-plus-circle"></i></a>
-  <a routerLink="/tarefas/create/2" class="violet"><i class="fa fa-plus-circle"></i></a>
-  <a routerLink="/tarefas/create/1" routerLinkActive="active" class="blue"><i class="fa fa-plus-circle"></i></a>
-</div> -->
+<app-task-navbar></app-task-navbar>
 
   <div class="container">
     <div class="tasks">
-        <!-- <div [ngClass]="classesCss" role="alert" *ngIf="mensagem">
-            <span [ngSwitch]="mensagem.tipo">
-                <strong *ngSwitchCase="'danger'">Error!</strong>
-                <strong *ngSwitchCase="'warning'">Alerta!</strong>
-                <strong *ngSwitchCase="'success'">Sucesso!</strong>
-                <strong *ngSwitchDefault>Error!</strong>
-            </span>
-            
-             {{ mensagem.texto }}
-         </div> -->
+    
         <h2>To do</h2>
         <nav class="all-view-delete">
             <a type="button" [routerLink]="['all', 'todo']"><i class="fa fa-tasks"></i></a>
@@ -23,9 +10,10 @@
         </nav>
         <div class="todo" [dragula]='"second-bag"'>
           
-          <div class="card-to" *ngFor="let task of filterTaskOfState('1')"  [style.backgroundColor]="task.color" title="{{ task.id }}">
+          <div class="card-to" *ngFor="let task of filterTaskOfState('1')"  [style.backgroundColor]="task.color" data-id="{{task.id}}" title="{{ task.tarefa }}">
             <fa name="times" (click)="delete(task)"></fa>
-            <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a>
+            <!-- <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a> -->
+            <a (click)="onEdit(task)" ><p>{{ task.tarefa }}</p></a>
           </div>
        
         </div>
@@ -37,11 +25,12 @@
         <div class="doing" [dragula]='"second-bag"' >
             
           <div class="card-doing" *ngFor="let task of filterTaskOfState('2')" 
-          [style.backgroundColor]="task.color"
-          title="{{ task.id }}"
+          [style.backgroundColor]="task.color" data-id="{{task.id}}"
+          title="{{ task.tarefa }}"
           >
             <fa name="times" (click)="delete(task)"></fa>
-            <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a>
+            <!-- <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a> -->
+            <a (click)="onEdit(task)" ><p>{{ task.tarefa }}</p></a>
           </div>
         </div>
         <h2>Done</h2>
@@ -51,9 +40,12 @@
         </nav>
         <div class="done" [dragula]='"second-bag"' >
             
-          <div class="card-done" *ngFor="let task of filterTaskOfState('3')" [style.backgroundColor]="task.color" title="{{ task.id }}">
+          <div class="card-done" *ngFor="let task of filterTaskOfState('3')" [style.backgroundColor]="task.color"
+          data-id="{{task.id}}"
+          title="{{ task.tarefa }}">
             <fa name="times" (click)="delete(task)"></fa>
-            <a [routerLink]="['/tasks/detail', task.id]"><p>{{ task.tarefa }}</p></a>
+            <!-- <a [routerLink]="['/tasks/detail', task.id]"><p>{{ task.tarefa }}</p></a> -->
+            <a (click)="onEdit(task)"><p>{{ task.tarefa }}</p></a>
           </div>
         </div>
     </div>

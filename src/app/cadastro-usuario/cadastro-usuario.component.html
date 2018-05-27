@@ -2,14 +2,14 @@
   <a  id="l-postask">PosTask</a>
   <div class="search">
     <div class="input-search">
-      <button routerLink="/cadastro">Sing up</button>
+      <button routerLink="/login">Sing in</button>
     </div> 
   </div>
 </nav>
 <div class="container">
-  <div class="form" >
-      <h2>Login</h2>
-      <p *ngIf="message">Usuário inexistente ou incorreto!</p>
+  <div class="form">
+      <h2>Cadastro</h2>
+      <p [ngClass]="{incorreto: y}"></p>
       <form #f="ngForm">
           <div class="form-group">
             <label for="nome">Nome</label>
@@ -19,7 +19,7 @@
             <label for="password">Senha</label>
             <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required>
           </div>
-          <button (click)="onSubmit()" type="submit" [disabled]="!f.valid">Entrar</button>
-        </form>
+          <button (click)="onSubmit()" [disabled]="!f.valid">Save</button>
+      </form>
   </div>
 </div>

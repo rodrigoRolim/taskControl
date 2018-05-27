@@ -6,18 +6,22 @@ import { of } from 'rxjs/observable/of';
 import { TASKS } from './mock-tasks';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Http, Headers, Response } from  '@angular/http';
+import { User } from './user';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 @Injectable()
 export class TaskService {
-  private tasksUrl = "api/tasks";
+  //private tasksUrl = "api/tasks";
+  private tasksUrl = "http://192.168.100.3:3000";
+  private task: Task;
   constructor( 
     private http: HttpClient
     //private messageService: MessageService
   ) { }
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.tasksUrl)
+  getTasks(obj: any): Observable<Task[]> {
+    const url = `${this.tasksUrl}/tasks`;
+    return this.http.post<Task[]>(url, obj, httpOptions)
       .pipe(
         catchError(this.handleError('getTasks', []))
       );
@@ -43,21 +47,23 @@ export class TaskService {
     );
   }
 
-  updateTask(task: Task): Observable<any> {
-    return this.http.put(this.tasksUrl, task, httpOptions).pipe(
+  updateTask(tokenTask: any): Observable<any> {
+    const url = `${this.tasksUrl}/update`;
+    return this.http.post(url, tokenTask, httpOptions).pipe(
       catchError(this.handleError<any>('updateTask'))
     )
   }
-  addTask(task: Task){
-    return this.http.post<Task>(this.tasksUrl, task, httpOptions).pipe(
-      catchError(this.handleError<Task>('addTask'))
+  addTask(tokenTask: any){
+    const url = `${this.tasksUrl}/task`;
+    return this.http.post<any>(url, JSON.stringify(tokenTask), httpOptions).pipe(
+      catchError(this.handleError<any>('addTask'))
     );
   }
   deleteTask(task: Task): Observable<Task> {
-    const id = typeof task === 'number' ? task: task.id;
-    const url = `${this.tasksUrl}/${id}`;
-
-    return this.http.delete<Task>(url, httpOptions).pipe(
+    //const id = typeof task === 'number' ? task: task.id;
+    const url = `${this.tasksUrl}/remove`;
+    const obj = {token: localStorage.getItem('token'), id: task.id};
+    return this.http.post<Task>(url, obj, httpOptions).pipe(
       catchError(this.handleError<Task>('deleteTask'))
     );
   }
@@ -67,5 +73,24 @@ export class TaskService {
         .get(`${this.tasksUrl}/?tarefa=${term}`)
         .map((res : Response) => res.json().data as Task[]);
 
-}
+  }
+  getTokenUser(user: User): Observable<any> {
+    return this.http.post<User>(`${this.tasksUrl}/register`, user, httpOptions).pipe(
+      catchError(this.handleError<User>('addUser'))
+    );
+  }
+  getLogin(user: User): Observable<any> {
+    return this.http.post<User>(`${this.tasksUrl}/login`, user, httpOptions).pipe(
+      catchError(this.handleError<User>('login'))
+    );
+  }
+  setTaskForEdition(task: Task): void {
+    this.task = task;
+  }
+  getTaskForEdition(): Observable<Task> {
+    return Observable.of(this.task);
+  }
+  existTaskForEdition(): boolean {
+    return this.task !== undefined ? true : false;
+  }
 }

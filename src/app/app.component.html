@@ -1,18 +1,5 @@
-<nav class="nav">
-    <a  id="l-postask">PosTask</a>
-    <div class="btns">
-        <button type="button" id="bt-create" routerLink="/tasks/save" title="criar uma tarefa">Criar Postite</button>
-        <button type="button" id="bt-home" routerLink="/" title="página inicial">Home</button>
-    </div>
-    <div class="search">
-        <input type="search" class="input-search" placeholder="search task ..."
-        name="busca"
-        [(ngModel)]="termo"
-        >
-    </div>
-</nav>
 <router-outlet></router-outlet>
-<app-task-search [busca]="termo" (buscaChange)="termo=$event"></app-task-search>
+<!--<app-task-search [busca]="termo" (buscaChange)="termo=$event"></app-task-search>-->
 <footer>
     <p>:)</p>
 </footer>

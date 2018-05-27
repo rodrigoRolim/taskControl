@@ -1,3 +1,4 @@
+<app-task-navbar></app-task-navbar>
 <div class="container">
   <form #f="ngForm" novalidate (ngSubmit)="onSubmit(f, todo, doing, done)">
     <div  [ngClass]=" getFormGroupClass(tarefa.valid, tarefa.pristine)">

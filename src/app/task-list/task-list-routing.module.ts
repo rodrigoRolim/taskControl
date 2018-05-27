@@ -3,24 +3,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './task-list.component';
 import { TaskCreateComponent } from '../task-create/task-create.component';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
-
+import { AuthGuardService as AuthGuard } from '../auth-guard.service';
 const taskRoutes: Routes = [
     {
         path: 'tasks', 
-        component: TaskListComponent
+        component: TaskListComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'tasks/save',
-        component: TaskCreateComponent
+        component: TaskCreateComponent,
+        canActivate: [AuthGuard]
     },
     {
-        path: 'tasks/detail/:id',
-        component: TaskCreateComponent
+        path: 'tasks/detail',
+        component: TaskCreateComponent,
+        canActivate: [AuthGuard]
      
     },
     {
         path: 'tasks/all/:state',
         component: TaskDetailComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'todo',

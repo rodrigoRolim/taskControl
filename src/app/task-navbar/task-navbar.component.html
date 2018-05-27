@@ -1,0 +1,14 @@
+<nav class="nav">
+  <a  id="l-postask">PosTask</a>
+  <div class="btns">
+      <button type="button" id="bt-create" routerLink="/tasks/save" title="criar uma tarefa">Criar Postite</button>
+      <button type="button" id="bt-home" routerLink="/home" title="página inicial">Home</button>
+  </div>
+  <div class="search">
+      <input type="search" class="input-search" placeholder="search task ..."
+      name="busca"
+      [(ngModel)]="termo"
+      >
+  </div>
+  <div class="logout"> <button type="button" id="bt-logout" (click)="onLogout()">log out</button></div>
+</nav>

@@ -32,7 +32,8 @@ export class TaskSearchComponent implements OnInit {
       this.getTasks();
   }
   getTasks(): void {
-    this.taskService.getTasks()
+    const obj = {token:localStorage.getItem('token')}
+    this.taskService.getTasks(obj)
       .subscribe(tasks => this.task = tasks);
   }
   ngOnChanges(changes: SimpleChanges): void {

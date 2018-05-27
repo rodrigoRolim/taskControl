@@ -29,7 +29,8 @@ export class TaskDetailComponent implements OnInit {
    
   }
   getTasks(): void {
-    this.taskService.getTasks()
+    const obj = {token: localStorage.getItem('token')}
+    this.taskService.getTasks(obj)
       .subscribe(tasks => this.tasks = tasks.filter(t => t.state === this.state));
   }
 }

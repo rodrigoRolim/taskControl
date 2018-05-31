@@ -18,11 +18,6 @@ const routes: Routes = [
     component: TaskLoginComponent
   },
   {
-    path: 'tasks',
-    component: TaskListComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'cadastro',
     component: CadastroUsuarioComponent
   }

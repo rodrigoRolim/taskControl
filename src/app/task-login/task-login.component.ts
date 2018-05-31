@@ -23,11 +23,12 @@ export class TaskLoginComponent implements OnInit {
   onSubmit(): void {
     this.user.username = this.username;
     this.user.password = this.password;
-    this.loginUser();
+    this.loginUser(this.user);
   }
-  loginUser(): void {
-    this.taskService.getLogin(this.user).subscribe(obj => {
-      (!obj.error) ? this.router.navigate(['home']) : this.message = true;
+  loginUser(user: User): void {
+    this.taskService.getLogin(user).subscribe(obj => {
+      localStorage.setItem('token', obj.token);
+      (!obj.error) ? this.router.navigate(['tasks']) : this.message = true;
     });
     
   }

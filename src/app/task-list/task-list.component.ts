@@ -13,7 +13,10 @@ export class TaskListComponent implements OnInit {
   msg='';
   tasks: Task[];
   taskSelected: Task;
-  
+  taskTODO: Task[];
+  taskDOING: Task[];
+  taskDONE: Task[];
+
   constructor(
     private dragulaService: DragulaService,
     private taskService: TaskService,
@@ -48,8 +51,9 @@ export class TaskListComponent implements OnInit {
         setTimeout(() => {
           this.msg = '';
         }, 1000);
+       
       });
-          this.getTasks();
+      this.getTasks();
     
   }
   getTasks(): void {
@@ -57,7 +61,23 @@ export class TaskListComponent implements OnInit {
     this.taskService.getTasks(obj)
       .subscribe(tasks => {
         this.tasks = tasks;
+        this.getTasksTodo(tasks)
+        this.getTasksDoing(tasks)
+        this.getTaskDone(tasks)
       });
+  }
+  getTasksById(id: number): Task {
+    const task = this.tasks.find(task => task.id == id);
+    return task;
+  }
+  private getTasksTodo(tasks: Task[]): void {
+    this.taskTODO = tasks.filter(tasksTodo => tasksTodo.state != 2 && tasksTodo.state != 3);
+  }
+  private getTasksDoing(tasks: Task[]): void {
+    this.taskDOING = tasks.filter(tasksDoing => tasksDoing.state != 3 && tasksDoing.state != 1);
+  }
+  private getTaskDone(tasks: Task[]): void {
+    this.taskDONE = tasks.filter(tasksDone => tasksDone.state != 2 && tasksDone.state != 1);
   }
   onSelect(task: Task): void {
     this.taskSelected = task;
@@ -66,6 +86,7 @@ export class TaskListComponent implements OnInit {
     this.tasks = this.tasks.filter(t => t !== task);
     this.taskService.deleteTask(task).subscribe();
   }
+  
   private hasClass(el: any, name: string) {
     return new RegExp('(?:^|\\s+)' + name + '(?:\\s+|$)').test(el.className);
   }
@@ -91,25 +112,23 @@ export class TaskListComponent implements OnInit {
   private onDrop(args) {
     let [e, el] = args;
     this.addClass(e, 'ex-moved');
-    //console.log({args});
-    //console.log(args[2].classList.value);
     let id: number = +args[0].id; 
+   
     if(args[2].classList.value == 'done' && args[1].classList.value != 'done') {
-       const task = this.tasks.find(task => task.id == id);
-       task.state = (args[1].classList.value == 'doing ex-over')? 2 : 1;
-       const obj = {token: localStorage.getItem('token'), task: task}
-       this.taskService.updateTask(JSON.stringify(obj)).subscribe();
+      const task = this.getTasksById(id);
+      task.state = (args[1].classList.value == 'doing ex-over')? 2 : 1;
+      const obj = {token: localStorage.getItem('token'), task: task}
+      this.taskService.updateTask(JSON.stringify(obj)).subscribe();
+     
     }
     if(args[2].classList.value == 'doing' && args[1].classList.value != 'doing') {
-      const task = this.tasks.find((task) => task.id == id);
+      const task = this.getTasksById(id);
       task.state = (args[1].classList.value == 'todo ex-over')? 1 : 3;
-      console.log(task);  
       const obj = {token: localStorage.getItem('token'), task: task}
       this.taskService.updateTask(JSON.stringify(obj)).subscribe();
     }
     if(args[2].classList.value == 'todo' && args[1].classList.value != 'todo') {
-      const task = this.tasks.find(task => task.id == id);
-      console.log(task);
+      const task = this.getTasksById(id);
       task.state = (args[1].classList.value == 'doing ex-over')? 2 : 3;
       const obj = {token: localStorage.getItem('token'), task: task}
       this.taskService.updateTask(JSON.stringify(obj)).subscribe();
@@ -124,11 +143,6 @@ export class TaskListComponent implements OnInit {
   private onOut(args) {
     let [e, el, container] = args;
     this.removeClass(el, 'ex-over');
-  }
-  filterTaskOfState(state: number): Task[] {
-    console.log(this.tasks);
-   const task: Task[] = (!this.tasks == undefined) ? this.tasks.filter(task => task.state == +state): [];
-    return task;
   }
   deleteAll(s: number): void {
     this.tasks.forEach(t => {

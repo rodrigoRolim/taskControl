@@ -18,7 +18,7 @@ const routes: Routes = [
     component: TaskLoginComponent
   },
   {
-    path: 'home',
+    path: 'tasks',
     component: TaskListComponent,
     canActivate: [AuthGuard]
   },

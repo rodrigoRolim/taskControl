@@ -16,7 +16,7 @@ const taskRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'tasks/detail',
+        path: 'tasks/detail/:id',
         component: TaskCreateComponent,
         canActivate: [AuthGuard]
      

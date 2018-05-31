@@ -12,8 +12,7 @@
           
           <div class="card-to" *ngFor="let task of filterTaskOfState('1')"  [style.backgroundColor]="task.color" data-id="{{task.id}}" title="{{ task.tarefa }}">
             <fa name="times" (click)="delete(task)"></fa>
-            <!-- <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a> -->
-            <a (click)="onEdit(task)" ><p>{{ task.tarefa }}</p></a>
+            <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a>
           </div>
        
         </div>
@@ -29,8 +28,7 @@
           title="{{ task.tarefa }}"
           >
             <fa name="times" (click)="delete(task)"></fa>
-            <!-- <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a> -->
-            <a (click)="onEdit(task)" ><p>{{ task.tarefa }}</p></a>
+             <a [routerLink]="['/tasks/detail', task.id]" ><p>{{ task.tarefa }}</p></a>
           </div>
         </div>
         <h2>Done</h2>
@@ -44,8 +42,7 @@
           data-id="{{task.id}}"
           title="{{ task.tarefa }}">
             <fa name="times" (click)="delete(task)"></fa>
-            <!-- <a [routerLink]="['/tasks/detail', task.id]"><p>{{ task.tarefa }}</p></a> -->
-            <a (click)="onEdit(task)"><p>{{ task.tarefa }}</p></a>
+            <a [routerLink]="['/tasks/detail', task.id]"><p>{{ task.tarefa }}</p></a>
           </div>
         </div>
     </div>

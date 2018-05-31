@@ -49,14 +49,13 @@ export class TaskListComponent implements OnInit {
           this.msg = '';
         }, 1000);
       });
-      this.getTasks();
+          this.getTasks();
     
   }
   getTasks(): void {
     const obj = {token: localStorage.getItem('token')};
     this.taskService.getTasks(obj)
       .subscribe(tasks => {
-        console.log(tasks);
         this.tasks = tasks;
       });
   }
@@ -126,8 +125,9 @@ export class TaskListComponent implements OnInit {
     let [e, el, container] = args;
     this.removeClass(el, 'ex-over');
   }
-  filterTaskOfState(s: number): Task[] {
-   const task: Task[] = (this.tasks !== undefined ) ? this.tasks.filter(t => t.state == +s): [];
+  filterTaskOfState(state: number): Task[] {
+    console.log(this.tasks);
+   const task: Task[] = (!this.tasks == undefined) ? this.tasks.filter(task => task.state == +state): [];
     return task;
   }
   deleteAll(s: number): void {
@@ -136,10 +136,5 @@ export class TaskListComponent implements OnInit {
         this.delete(t);
       }
     }); 
-  }
-  onEdit(task: Task): void {
-    this.taskService.setTaskForEdition(task);
-    this.route.navigate(['tasks/detail']);
-    console.log("fudeu");
   }
 }

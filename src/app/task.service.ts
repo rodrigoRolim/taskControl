@@ -91,6 +91,6 @@ export class TaskService {
     return Observable.of(this.task);
   }
   existTaskForEdition(): boolean {
-    return this.task !== undefined ? true : false;
+    return this.task !== undefined || this.task !== null ? true : false;
   }
 }

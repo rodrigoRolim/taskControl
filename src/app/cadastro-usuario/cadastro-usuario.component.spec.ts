@@ -22,4 +22,5 @@ describe('CadastroUsuarioComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
 });

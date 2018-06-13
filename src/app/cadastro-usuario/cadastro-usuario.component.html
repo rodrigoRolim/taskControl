@@ -19,7 +19,7 @@
             <label for="password">Senha</label>
             <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" required>
           </div>
-          <button (click)="onSubmit()" [disabled]="!f.valid">Save</button>
+          <button (click)="onSubmit()" type="submit" [disabled]="!f.valid">Save</button>
       </form>
   </div>
 </div>

@@ -83,7 +83,9 @@ export class TaskListComponent implements OnInit {
     this.taskSelected = task;
   }
   delete(task: Task): void {
-    this.tasks = this.tasks.filter(t => t !== task);
+    this.taskTODO = this.taskTODO.filter(t => t !== task);
+    this.taskDOING = this.taskDOING.filter(t => t !== task);
+    this.taskDONE = this.taskDONE.filter(t => t !== task);
     this.taskService.deleteTask(task).subscribe();
   }
   
@@ -119,7 +121,6 @@ export class TaskListComponent implements OnInit {
       task.state = (args[1].classList.value == 'doing ex-over')? 2 : 1;
       const obj = {token: localStorage.getItem('token'), task: task}
       this.taskService.updateTask(JSON.stringify(obj)).subscribe();
-     
     }
     if(args[2].classList.value == 'doing' && args[1].classList.value != 'doing') {
       const task = this.getTasksById(id);

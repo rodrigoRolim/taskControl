@@ -9,6 +9,7 @@ import { RadioControlValueAccessor } from '@angular/forms';
 import {FormControl, FormGroup} from '@angular/forms';
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-task-create',
   templateUrl: './task-create.component.html',
@@ -28,14 +29,10 @@ export class TaskCreateComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.task = new Task();
-      //this.task.tarefa = "";
-      // this.task.descricao = "";
       this.task.state = 1;
       this.task.color = "#23244D";
       this.value = +params['id'];
       if(this.value > 0) {
-        console.log("entrou");
-        console.log(this.value);
         this.isNew = false;
         this.getTasks(this.value);
       }

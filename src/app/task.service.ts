@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class TaskService {
   //private tasksUrl = "api/tasks";
-  private tasksUrl = "http://192.168.100.3:3000";
+  private tasksUrl = "http://192.168.100.20:3000";
   private task: Task;
   constructor( 
     private http: HttpClient
@@ -28,14 +28,6 @@ export class TaskService {
   }
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-  
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-  
-      // TODO: better job of transforming error for user consumption
-      //this.log(`${operation} failed: ${error.message}`);
-  
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
